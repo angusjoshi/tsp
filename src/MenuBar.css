@@ -1,0 +1,6 @@
+.menu-bar { 
+    display: flex;
+    width: 100%;
+    background-color: blueviolet;
+    height: 20%;
+}
