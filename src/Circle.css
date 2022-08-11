@@ -1,0 +1,19 @@
+.node { 
+    position: relative;
+
+    /* setting height to 0, width relative to parent */
+    /* means setting padding bottom sets height relative to width */
+    /* credit https://stackoverflow.com/a/13625843/12320142 */
+    width: 5%;
+    height: 0;
+    padding-bottom: 5%;
+
+    border-radius: 50%;
+    background-color: rgb(19, 43, 224);
+    grid-column-start: 1;
+    grid-row-start: 1;
+}
+
+.ghost {
+    opacity: 50%;
+}

@@ -1,0 +1,6 @@
+.main-area { 
+    background-color: rgb(85, 231, 85);
+    display: grid;
+    width: 100%;
+    height: 80%; 
+}
