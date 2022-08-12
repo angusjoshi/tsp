@@ -1,44 +1,30 @@
-import React, {useState} from 'react'
-import Circle from './Circle';
+import React, {useEffect, useState, useRef, useCallback} from 'react'
+import Canvas from './Canvas'
 import './MainArea.css'
-function MainArea() { 
-const [circles, setCircles] = useState([]);
-const [nextId, setNextId] = useState(0);
-const [mousePos, setMousePos] = useState({x: 0, y:0,});
-const handleClick = event => { 
-    console.log(event.clientX);
-    console.log(event.clientY);
-    setCircles([...circles, {
-        x: event.clientX - event.target.offsetLeft,
-        y: event.clientY - event.target.offsetTop,
-        key: nextId,
-    }]);
-    setNextId(nextId + 1);
+function MainArea(props) { 
     
-};
-const getMousePos = event => ({
-    x: event.clientX - event.target.offsetLeft,
-    y: event.clientY - event.target.offsetTop,
-});
-const handleMouseMove = event => { 
-    setMousePos(getMousePos(event));
-}
-const handleMouseEnter = () => { 
-    console.log("entered");
-}
-const handleMouseLeave = () => { 
-    console.log("left");
-}
-const genCircleComponents = () => circles.map( circle => 
-    <Circle x={circle.x} y={circle.y} key={circle.key} />
-);
-    return (
-        <div className="main-area" onClick={handleClick} onMouseMove={handleMouseMove}
-            onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-            {genCircleComponents()}
-            <Circle ghost={true} x={mousePos.x} y={mousePos.y}/>
+    
+    
+    const draw = context => {
+        context.fillStyle = '#000000'
+        for(let i = 0; i < props.circles.length; i++) {
             
-        </div>
-    );
+            context.beginPath()
+            context.arc(props.circles[i].pos.x, props.circles[i].pos.y, 20, 0, 2*Math.PI)
+            context.fill()
+        }
+        if(props.circles.length > 2) { 
+            context.moveTo(props.circles[0].pos.x, props.circles[0].pos.y);
+            context.lineTo(props.circles[1].pos.x, props.circles[1].pos.y);
+            context.stroke();
+
+        }
+    }
+   
+        return (
+            <div className="main-area" onClick={props.handleClick}>
+                    <Canvas draw={draw}/>
+            </div>
+        );
 }
 export default MainArea;

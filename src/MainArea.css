@@ -4,3 +4,8 @@
     width: 100%;
     height: 80%; 
 }
+.graphics-area { 
+    
+    width: inherit;
+    height: inherit;
+}
