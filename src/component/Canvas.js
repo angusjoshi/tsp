@@ -1,4 +1,4 @@
-import useCanvas from "./useCanvas";
+import useCanvas from "../hooks/useCanvas";
 import "./Canvas.css"
 function Canvas(props) { 
     const canvasRef = useCanvas(props.draw);
