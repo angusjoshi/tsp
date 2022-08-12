@@ -18,8 +18,8 @@ function App() {
     y: event.clientY - event.currentTarget.offsetTop,
   });
   const clear = () => {
-    setCircles(new Array());
-    setPath(new Array());
+    setCircles([]);
+    setPath([]);
   }
   const findPath = () => { 
     setPath(nearestNeighbor(circles));

@@ -25,7 +25,7 @@ const dist = (circle1, circle2) => {
 }
 
 function nearestNeighbor(circles) {
-    if(circles.length == 0) return [];
+    if(circles.length === 0) return [];
     const dists = getDists(circles);
     const visited = new Set();
     const result = [0];
