@@ -2,7 +2,7 @@ import './App.css';
 import React, {useState} from 'react';
 import MainArea from './MainArea';
 import MenuBar from './MenuBar';
-import nearestNeighbor from '../logic/FindPath';
+import { nearestNeighbor, swapHeuristic, twoOptHeuristic } from '../logic/FindPath';
 
 
 function App() {
@@ -10,7 +10,7 @@ function App() {
   const [path, setPath] = useState([]);
 
   const handleMainAreaClick = event => { 
-    //setPath([...path, circles.length]);
+    setPath([...path, circles.length]);
     setCircles([...circles, getMousePos(event)]);
   };
   const getMousePos = event => ({
@@ -18,11 +18,11 @@ function App() {
     y: event.clientY - event.currentTarget.offsetTop,
   });
   const clear = () => {
-    setCircles([]);
-    setPath([]);
+    setCircles(circles => []);
+    setPath(path => []);
   }
   const findPath = () => { 
-    setPath(nearestNeighbor(circles));
+    setPath(twoOptHeuristic(circles));
   }
   return (
     <div className="App">

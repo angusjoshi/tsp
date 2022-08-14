@@ -46,11 +46,86 @@ function nearestNeighbor(circles) {
         while(visited.has(indexedDists[j][0])) j++;
         result.push(indexedDists[j][0]);
     }
-    console.log(tourValue(dists, result))
     return result;
 }
-
-
+const swap = (arr, i, j) => {
+    const temp = arr[i];
+    arr[i] = arr[j];
+    arr[j] = temp;
+}
+Number.prototype.mod = function (n) {
+    "use strict";
+    return ((this % n) + n) % n;
+  };
+const trySwap = (i, dists, path) => { 
+    const j = (i + 1) % path.length;
+    const before = (i - 1).mod(path.length);
+    const after = (j + 1) % path.length;
+    const distBefore = dists[path[before]][path[i]] + dists[path[j]][path[after]];
+    const distAfter = dists[path[before]][path[j]] + dists[path[i]][path[after]];
+    if(distAfter < distBefore) { 
+        swap(path, i, j)
+        return true;
+    }
+    return false;
+}
+const swapHeuristic = circles => {
+    const path = genInitialPerm(circles);
+    const k = 1000;
+    const dists = getDists(circles);
+    let better = true;
+    let count = 0;
+    while(better && (count < k || k === -1)) {
+        better = false;
+        count++;
+        for(let i = 0; i < circles.length; i++) { 
+            if(trySwap(i, dists, path)) better = true;
+        }
+    }
+    return path;
+}
+const genInitialPerm = circles => { 
+    const path = [];
+    for(let i = 0; i < circles.length; i++) {
+        path.push(i);
+    }
+    return path;
+}
+const twoOptHeuristic = circles => { 
+    const path = genInitialPerm(circles);
+    let better = true;
+    let count = 0;
+    const dists = getDists(circles);
+    const k = 1000;
+    while(better && (count < k || k == -1)) { 
+        better = false;
+        count++;
+        for(let j = 0; j < circles.length; j++) { 
+            for(let i = 0; i < j; i++) { 
+                if(i != j) { 
+                    if(tryReverse(path, dists, i, j)) better = true;
+                }
+            }
+        }
+    }
+    return path;
+}
+const tryReverse = (path, dists, i, j) => {
+    const before = (i - 1).mod(path.length);
+    const after = (j + 1).mod(path.length);
+    const distBefore = dists[path[before]][path[i]] + dists[path[j]][path[after]];
+    const distAfter = dists[path[before]][path[j]] + dists[path[i]][path[after]];
+    if(distAfter < distBefore) { 
+        reverse(path, i, j);
+        return true;
+    }
+    return false;
+}
+const reverse = (path, i, j) => {
+    while(i < j) { 
+        swap(path, i++, j--);
+    }
+}
 const tourValue = (dists, path) => {
     if(path.length <= 1) return 0;
     let total = dists[path[0]][path[path.length - 1]];
@@ -59,4 +134,4 @@ const tourValue = (dists, path) => {
     }
     return total;
 }
-export default nearestNeighbor;
+export { nearestNeighbor, swapHeuristic, twoOptHeuristic };
