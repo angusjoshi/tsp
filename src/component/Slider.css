@@ -1,0 +1,14 @@
+.slider { 
+    z-index: 1;
+    grid-column-start: 1;
+    grid-row-start: 1;
+    width: 100%;
+}
+.slider-div { 
+    position: relative;
+    background-color: #C5FAD5;
+}
+p { 
+    height: 50%;
+    text-align: center;
+}

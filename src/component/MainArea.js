@@ -1,4 +1,6 @@
 import Canvas from './Canvas'
+import Slider from './Slider';
+
 import './MainArea.css'
 function MainArea(props) { 
     const getX = i => props.circles[i].x;

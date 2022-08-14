@@ -2,7 +2,6 @@ import "./App.css";
 import React, { useState } from "react";
 import MainArea from "./MainArea";
 import MenuBar from "./MenuBar";
-import Slider from "./Slider";
 import {
   nearestNeighbor,
   swapHeuristic,
@@ -14,8 +13,12 @@ function App() {
   const [path, setPath] = useState([]);
   const [selectedAlgo, setSelectedAlgo] = useState("twoOpt");
   const [pathFinding, setPathFinding] = useState(false);
+  const [pathSpeed, setPathSpeed] = useState(5);
   const availAlgos = ["twoOpt", "swap", "nearestNeighbor"];
 
+  const handleSliderChange = event => {
+    setPathSpeed(event.target.valueAsNumber);
+  }
   const handleMainAreaClick = (event) => {
     // setPath([...path, circles.length]);
     if(!pathFinding) { 
@@ -33,13 +36,13 @@ function App() {
   const findPath = async () => {
     setPathFinding(true);
     if (selectedAlgo === "twoOpt") {
-      await twoOptHeuristic(circles, setPath);
+      await twoOptHeuristic(circles, setPath, pathSpeed);
     }
     else if (selectedAlgo === "swap") {
-      await swapHeuristic(circles, setPath);
+      await swapHeuristic(circles, setPath, pathSpeed);
     }
     else if (selectedAlgo === "nearestNeighbor") {
-      await nearestNeighbor(circles, setPath);
+      await nearestNeighbor(circles, setPath, pathSpeed);
     }
     setPathFinding(false);
   };
@@ -55,6 +58,7 @@ function App() {
         selectedAlgo={selectedAlgo}
         handleDropdownClick={handleDropdownClick}
         pathFinding={pathFinding}
+        handleSliderChange={handleSliderChange}
       />
       <MainArea
         handleClick={handleMainAreaClick}

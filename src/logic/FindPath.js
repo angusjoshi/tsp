@@ -24,7 +24,7 @@ const dist = (circle1, circle2) => {
     return Math.sqrt(deltaX*deltaX + deltaY*deltaY);
 }
 
-const nearestNeighbor = async (circles, setPath) => {
+const nearestNeighbor = async (circles, setPath, pathSpeed) => {
     if(circles.length === 0) return [];
     const dists = getDists(circles);
     const visited = new Set();
@@ -44,7 +44,7 @@ const nearestNeighbor = async (circles, setPath) => {
         })
         let j = 0;
         while(visited.has(indexedDists[j][0])) j++;
-        await sleep(100);
+        await sleep(1000 * Math.pow(Math.E,-pathSpeed));
         result.push(indexedDists[j][0]);
         setPath([...result]);
     }
@@ -73,7 +73,7 @@ const trySwap = async (i, dists, path, setPath) => {
     }
     return false;
 }
-const swapHeuristic = async (circles, setPath) => {
+const swapHeuristic = async (circles, setPath, pathSpeed) => {
     const path = genInitialPerm(circles);
     const k = 1000;
     const dists = getDists(circles);
@@ -95,7 +95,7 @@ const genInitialPerm = circles => {
     }
     return path;
 }
-const twoOptHeuristic = async (circles, setPath) => { 
+const twoOptHeuristic = async (circles, setPath, pathSpeed) => { 
     const path = genInitialPerm(circles);
     let better = true;
     let count = 0;
