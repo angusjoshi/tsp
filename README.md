@@ -4,4 +4,3 @@ You can play around with it here https://angusjoshi1.github.io/tsp/
 
 Place nodes by clicking in the large area at the bottom, select an algorithm from the dropdown at the top right, and press find path to find a path.
 
-All implemented algorithms are heuristic so do not guarantee shortest path.
