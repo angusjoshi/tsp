@@ -97,12 +97,12 @@ const twoOptHeuristic = circles => {
     let count = 0;
     const dists = getDists(circles);
     const k = 1000;
-    while(better && (count < k || k == -1)) { 
+    while(better && (count < k || k === -1)) { 
         better = false;
         count++;
         for(let j = 0; j < circles.length; j++) { 
             for(let i = 0; i < j; i++) { 
-                if(i != j) { 
+                if(i !== j) { 
                     if(tryReverse(path, dists, i, j)) better = true;
                 }
             }

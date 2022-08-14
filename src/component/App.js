@@ -8,9 +8,11 @@ import { nearestNeighbor, swapHeuristic, twoOptHeuristic } from '../logic/FindPa
 function App() {
   const [circles, setCircles] = useState([]);
   const [path, setPath] = useState([]);
+  const [selectedAlgo, setSelectedAlgo] = useState("twoOpt");
+  const availAlgos = ["twoOpt", "swap", "nearestNeighbor"];
 
   const handleMainAreaClick = event => { 
-    setPath([...path, circles.length]);
+    // setPath([...path, circles.length]);
     setCircles([...circles, getMousePos(event)]);
   };
   const getMousePos = event => ({
@@ -18,15 +20,29 @@ function App() {
     y: event.clientY - event.currentTarget.offsetTop,
   });
   const clear = () => {
-    setCircles(circles => []);
-    setPath(path => []);
+    setCircles([]);
+    setPath([]);
   }
   const findPath = () => { 
-    setPath(twoOptHeuristic(circles));
+    if(selectedAlgo === "twoOpt"){
+      setPath(twoOptHeuristic(circles));
+      return;
+    }
+    if(selectedAlgo === "swap") { 
+      setPath(swapHeuristic(circles));
+      return;
+    }
+    if(selectedAlgo === "nearestNeighbor") { 
+      setPath(nearestNeighbor(circles));
+      return;
+    }
+  }
+  const handleDropdownClick = newAlgo => {
+    setSelectedAlgo(newAlgo);
   }
   return (
     <div className="App">
-      <MenuBar clear={clear} findPath={findPath}/>
+      <MenuBar clear={clear} findPath={findPath} algorithms={availAlgos} selectedAlgo={selectedAlgo} handleDropdownClick={handleDropdownClick} />
       <MainArea handleClick={handleMainAreaClick} circles={circles}
         path={path}/>
     </div>

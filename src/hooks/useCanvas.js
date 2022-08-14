@@ -13,8 +13,8 @@ const useCanvas = draw =>  {
         const handleResize = () => {
             const canvas = canvasRef.current;
             const rect = canvas.getBoundingClientRect();
-            if(canvas.width != rect.width) canvas.width = rect.width;
-            if(canvas.height != rect.height) canvas.height = rect.height;
+            if(canvas.width !== rect.width) canvas.width = rect.width;
+            if(canvas.height !== rect.height) canvas.height = rect.height;
 
             const context = canvas.getContext('2d');
             draw(context);

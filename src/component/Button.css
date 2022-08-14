@@ -1,3 +1,10 @@
 .button { 
-    width: 50%
+    border: none;
+    width: 50%;
+    background-color: #C5FAD5;
+    cursor: pointer;
+}
+.button:hover { 
+    background-color: #c5fad5e7;
+    
 }
