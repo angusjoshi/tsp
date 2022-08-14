@@ -26,13 +26,14 @@ function MainArea(props) {
     }
     
     const draw = context => {
+        context.clearRect(0, 0, window.innerWidth, window.innerHeight);
         drawCircles(context);
         drawPath(context);
     }
    
         return (
             <div className="main-area" onClick={props.handleClick}>
-                    <Canvas draw={draw}/>
+                    <Canvas draw={draw} circles={props.circles} path={props.path}/>
             </div>
         );
 }

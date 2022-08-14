@@ -24,7 +24,7 @@ const dist = (circle1, circle2) => {
     return Math.sqrt(deltaX*deltaX + deltaY*deltaY);
 }
 
-function nearestNeighbor(circles) {
+const nearestNeighbor = async (circles, setPath) => {
     if(circles.length === 0) return [];
     const dists = getDists(circles);
     const visited = new Set();
@@ -44,7 +44,9 @@ function nearestNeighbor(circles) {
         })
         let j = 0;
         while(visited.has(indexedDists[j][0])) j++;
+        await sleep(100);
         result.push(indexedDists[j][0]);
+        setPath([...result]);
     }
     return result;
 }
@@ -57,19 +59,21 @@ Number.prototype.mod = function (n) {
     "use strict";
     return ((this % n) + n) % n;
   };
-const trySwap = (i, dists, path) => { 
+const trySwap = async (i, dists, path, setPath) => { 
     const j = (i + 1) % path.length;
     const before = (i - 1).mod(path.length);
     const after = (j + 1) % path.length;
     const distBefore = dists[path[before]][path[i]] + dists[path[j]][path[after]];
     const distAfter = dists[path[before]][path[j]] + dists[path[i]][path[after]];
     if(distAfter < distBefore) { 
+        await sleep(100);
         swap(path, i, j)
+        setPath([...path]);
         return true;
     }
     return false;
 }
-const swapHeuristic = circles => {
+const swapHeuristic = async (circles, setPath) => {
     const path = genInitialPerm(circles);
     const k = 1000;
     const dists = getDists(circles);
@@ -79,7 +83,7 @@ const swapHeuristic = circles => {
         better = false;
         count++;
         for(let i = 0; i < circles.length; i++) { 
-            if(trySwap(i, dists, path)) better = true;
+            if(await trySwap(i, dists, path, setPath)) better = true;
         }
     }
     return path;
@@ -91,7 +95,7 @@ const genInitialPerm = circles => {
     }
     return path;
 }
-const twoOptHeuristic = circles => { 
+const twoOptHeuristic = async (circles, setPath) => { 
     const path = genInitialPerm(circles);
     let better = true;
     let count = 0;
@@ -100,23 +104,25 @@ const twoOptHeuristic = circles => {
     while(better && (count < k || k === -1)) { 
         better = false;
         count++;
-        for(let j = 0; j < circles.length; j++) { 
+        for(let j = 0; j < circles.length - 1; j++) { 
             for(let i = 0; i < j; i++) { 
                 if(i !== j) { 
-                    if(tryReverse(path, dists, i, j)) better = true;
+                    if(await tryReverse(path, setPath, dists, i, j)) better = true;
                 }
             }
         }
     }
     return path;
 }
-const tryReverse = (path, dists, i, j) => {
+const tryReverse = async (path, setPath, dists, i, j) => {
     const before = (i - 1).mod(path.length);
     const after = (j + 1).mod(path.length);
     const distBefore = dists[path[before]][path[i]] + dists[path[j]][path[after]];
     const distAfter = dists[path[before]][path[j]] + dists[path[i]][path[after]];
     if(distAfter < distBefore) { 
+        await sleep(100);
         reverse(path, i, j);
+        setPath([...path]);
         return true;
     }
     return false;
@@ -134,4 +140,5 @@ const tourValue = (dists, path) => {
     }
     return total;
 }
+const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 export { nearestNeighbor, swapHeuristic, twoOptHeuristic };

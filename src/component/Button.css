@@ -3,6 +3,7 @@
     width: 50%;
     background-color: #C5FAD5;
     cursor: pointer;
+    padding: none;
 }
 .button:hover { 
     background-color: #c5fad5e7;

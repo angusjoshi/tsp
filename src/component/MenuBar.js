@@ -9,9 +9,9 @@ function MenuBar(props) {
     } 
     return (
         <div className="menu-bar">
-            <Button onClick={props.clear} text={"clear"}/>
-            <Button onClick={props.findPath} text={"find path"} />
-            <Dropdown algorithms={props.algorithms} selectedAlgo={props.selectedAlgo} handleDropdownClick={props.handleDropdownClick}/>
+            <Button onClick={props.clear} text={"clear"} disable={props.pathFinding} />
+            <Button onClick={props.findPath} text={"find path"} disable={props.pathFinding} />
+            <Dropdown algorithms={props.algorithms} selectedAlgo={props.selectedAlgo} handleDropdownClick={props.handleDropdownClick} disable={props.pathFinding}/>
         </div>
         
     );

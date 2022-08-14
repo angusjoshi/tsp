@@ -7,7 +7,7 @@ function Dropdown(props) {
     //and props.selectedAlgo
     const genButtons = () => { 
         return props.algorithms.map(algo => (
-            <a href="#" key={algo} onClick={() => props.handleDropdownClick(algo)}>{algo}</a>
+            <button key={algo} onClick={() => props.handleDropdownClick(algo)}>{algo}</button>
         )
         )
     }

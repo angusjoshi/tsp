@@ -1,13 +1,13 @@
 import { useRef, useEffect } from 'react';
 
-const useCanvas = draw =>  { 
+const useCanvas = (draw, circles, path) =>  { 
     const canvasRef = useRef(null);
 
     useEffect(() => { 
         const canvas = canvasRef.current;
         const context = canvas.getContext('2d');
         draw(context);
-    }, [draw])
+    }, [draw, circles, path])
 
     useEffect(() => {
         const handleResize = () => {
