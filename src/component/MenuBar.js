@@ -5,9 +5,6 @@ import './MenuBar.css'
 import Dropdown from './Dropdown';
 
 function MenuBar(props) {
-    const dummyFunc = () => {
-        console.log("dummy");
-    } 
     return (
         <div className="menu-bar">
             <Button onClick={props.clear} text={"clear"} disable={props.pathFinding} />

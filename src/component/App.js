@@ -14,7 +14,7 @@ function App() {
   const [selectedAlgo, setSelectedAlgo] = useState("twoOpt");
   const [pathFinding, setPathFinding] = useState(false);
   const [pathSpeed, setPathSpeed] = useState(5);
-  const availAlgos = ["twoOpt", "swap", "nearestNeighbor"];
+  const availAlgos = ["twoOpt", "nearestNeighbor"];
 
   const handleSliderChange = event => {
     setPathSpeed(event.target.valueAsNumber);
@@ -64,6 +64,7 @@ function App() {
         handleClick={handleMainAreaClick}
         circles={circles}
         path={path}
+        drawLastLine={!(pathFinding && selectedAlgo == "nearestNeighbor")}
         
       />
     </div>

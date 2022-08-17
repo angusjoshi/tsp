@@ -59,14 +59,14 @@ Number.prototype.mod = function (n) {
     "use strict";
     return ((this % n) + n) % n;
   };
-const trySwap = async (i, dists, path, setPath) => { 
+const trySwap = async (i, dists, path, setPath, pathSpeed) => { 
     const j = (i + 1) % path.length;
     const before = (i - 1).mod(path.length);
     const after = (j + 1) % path.length;
     const distBefore = dists[path[before]][path[i]] + dists[path[j]][path[after]];
     const distAfter = dists[path[before]][path[j]] + dists[path[i]][path[after]];
     if(distAfter < distBefore) { 
-        await sleep(100);
+        await sleep(1000 * Math.pow(Math.E,-pathSpeed));
         swap(path, i, j)
         setPath([...path]);
         return true;
@@ -83,7 +83,7 @@ const swapHeuristic = async (circles, setPath, pathSpeed) => {
         better = false;
         count++;
         for(let i = 0; i < circles.length; i++) { 
-            if(await trySwap(i, dists, path, setPath)) better = true;
+            if(await trySwap(i, dists, path, setPath, pathSpeed)) better = true;
         }
     }
     return path;
@@ -107,20 +107,20 @@ const twoOptHeuristic = async (circles, setPath, pathSpeed) => {
         for(let j = 0; j < circles.length - 1; j++) { 
             for(let i = 0; i < j; i++) { 
                 if(i !== j) { 
-                    if(await tryReverse(path, setPath, dists, i, j)) better = true;
+                    if(await tryReverse(path, setPath, dists, i, j, pathSpeed)) better = true;
                 }
             }
         }
     }
     return path;
 }
-const tryReverse = async (path, setPath, dists, i, j) => {
+const tryReverse = async (path, setPath, dists, i, j, pathSpeed) => {
     const before = (i - 1).mod(path.length);
     const after = (j + 1).mod(path.length);
     const distBefore = dists[path[before]][path[i]] + dists[path[j]][path[after]];
     const distAfter = dists[path[before]][path[j]] + dists[path[i]][path[after]];
     if(distAfter < distBefore) { 
-        await sleep(100);
+        await sleep(1000 * Math.pow(Math.E,-pathSpeed));
         reverse(path, i, j);
         setPath([...path]);
         return true;
