@@ -28,6 +28,7 @@ const nearestNeighbor = async (circles, setPath, pathSpeed) => {
     if(circles.length === 0) return [];
     const dists = getDists(circles);
     const visited = new Set();
+    setPath([0]);
     const result = [0];
     for(let i = 0; i < circles.length - 1; i++) {
         const lastNode = result[i];
@@ -112,6 +113,7 @@ const twoOptHeuristic = async (circles, setPath, pathSpeed) => {
             }
         }
     }
+    setPath([...path]);
     return path;
 }
 const tryReverse = async (path, setPath, dists, i, j, pathSpeed) => {
