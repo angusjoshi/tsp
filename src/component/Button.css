@@ -7,8 +7,10 @@
 }
 .button:hover { 
     background-color: #1d2db9;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     
 }
 .button:active { 
     background-color: #15218b;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
 }

@@ -4,6 +4,10 @@
     grid-row-start: 1;
     width: 100%;
     position: relative;
+    cursor: grab;
+}
+.slider:active {
+    cursor: grabbing;
 }
 .slider-div { 
     position: relative;
