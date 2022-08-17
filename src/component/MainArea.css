@@ -1,15 +1,12 @@
 .main-area { 
-    background-color: #FFFFD2;
+    background-color: #012085;
     display: grid;
     width: 100%;
-    height: 80%; 
+    height: 90%; 
     position: relative;
 }
 .graphics-area { 
     
     width: inherit;
     height: inherit;
-}
-.layer2 { 
-    background-color: aqua;
 }

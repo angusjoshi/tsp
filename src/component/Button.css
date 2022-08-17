@@ -1,11 +1,14 @@
 .button { 
     border: none;
-    width: 50%;
-    background-color: #C5FAD5;
+    background-color: #2a3fff;
     cursor: pointer;
     padding: none;
+    width: 10%;
 }
 .button:hover { 
-    background-color: #c5fad5e7;
+    background-color: #1d2db9;
     
+}
+.button:active { 
+    background-color: #15218b;
 }

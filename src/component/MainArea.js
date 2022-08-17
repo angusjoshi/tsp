@@ -53,8 +53,8 @@ function MainArea(props) {
     
     const draw = context => {
         context.clearRect(0, 0, window.innerWidth, window.innerHeight);
-        context.fillStyle = 'black';
-        context.strokeStyle = "black";
+        context.fillStyle = "#d13636";
+        context.strokeStyle = "#d13636";
         context.shadowColor = "black";
         context.lineWidth = 6;
         context.shadowBlur = 2;
@@ -64,7 +64,7 @@ function MainArea(props) {
     }
     const draw2 = context => {
         context.clearRect(0, 0, window.innerWidth, window.innerHeight);
-        context.fillStyle = "rgba(0,0,0, 0.5)"
+        context.fillStyle = "rgba(209, 54, 54, 0.5)"
         drawMouseCircle(context);
     }
     

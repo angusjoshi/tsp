@@ -3,12 +3,20 @@
     grid-column-start: 1;
     grid-row-start: 1;
     width: 100%;
+    position: relative;
 }
 .slider-div { 
     position: relative;
-    background-color: #C5FAD5;
+    background-color:#2a3fff;
+    width: 10%;
 }
 p { 
+    font-family: 'Open Sans';
     height: 50%;
     text-align: center;
 }
+input[type=range]::-webkit-slider-thumb { 
+    -webkit-appearance: none;
+
+}
+
