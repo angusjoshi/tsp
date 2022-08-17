@@ -132,6 +132,10 @@ const reverse = (path, i, j) => {
         swap(path, i++, j--);
     }
 }
+
+// const antColonyOpt = async(circles, setPath, pathSpeed) { 
+
+// }
 const tourValue = (dists, path) => {
     if(path.length <= 1) return 0;
     let total = dists[path[0]][path[path.length - 1]];

@@ -15,8 +15,8 @@ function App() {
   const [pathFinding, setPathFinding] = useState(false);
   const [pathSpeed, setPathSpeed] = useState(5);
   const availAlgos = ["twoOpt", "nearestNeighbor"];
-
-  const handleSliderChange = event => {
+  
+  const handleSliderChange  = event => {
     setPathSpeed(event.target.valueAsNumber);
   }
   const handleMainAreaClick = (event) => {

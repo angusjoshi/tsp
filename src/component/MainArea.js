@@ -1,8 +1,22 @@
 import Canvas from './Canvas'
 import Slider from './Slider';
-
+import { useState } from 'react';
 import './MainArea.css'
 function MainArea(props) { 
+    const [mouseX, setMouseX] = useState(0);
+    const [mouseY, setMouseY] = useState(0);
+    const [mouseInside, setMouseInside] = useState(false);
+
+    const handleMouseEnter = () => {
+        setMouseInside(true);
+    }
+   const handleMouseLeave = () => {
+        setMouseInside(false)
+   }
+   const handleMouseMove = event => {
+       setMouseX(event.clientX - event.currentTarget.offsetLeft);
+       setMouseY(event.clientY - event.currentTarget.offsetTop);
+   }
     const getX = i => props.circles[i].x;
     const getY = i => props.circles[i].y;
     const drawCircles = context => {
@@ -10,6 +24,13 @@ function MainArea(props) {
         for(let i = 0; i < props.circles.length; i++) {
             context.beginPath();
             context.arc(getX(i), getY(i), 20, 0, 2*Math.PI);
+            context.fill();
+        }
+    }
+    const drawMouseCircle = context => {
+        if(mouseInside) {
+            context.beginPath();
+            context.arc(mouseX, mouseY, 20, 0, 2*Math.PI);
             context.fill();
         }
     }
@@ -39,11 +60,19 @@ function MainArea(props) {
         context.shadowBlur = 2;
         drawCircles(context);
         drawPath(context);
+        
     }
-   
+    const draw2 = context => {
+        context.clearRect(0, 0, window.innerWidth, window.innerHeight);
+        context.fillStyle = "rgba(0,0,0, 0.5)"
+        drawMouseCircle(context);
+    }
+    
         return (
-            <div className="main-area" onClick={props.handleClick}>
-                    <Canvas draw={draw} circles={props.circles} path={props.path}/>
+            <div className="main-area" onClick={props.handleClick} onMouseEnter={handleMouseEnter} onMouseMove={handleMouseMove}
+            onMouseLeave={handleMouseLeave}>
+                    <Canvas className="main-layer" draw={draw} circles={props.circles} path={props.path}/>
+                    <Canvas className="mouse-circle-layer" draw={draw2}/>
             </div>
         );
 }
