@@ -138,7 +138,8 @@ const reverse = (path, i, j) => {
 // const antColonyOpt = async(circles, setPath, pathSpeed) { 
 
 // }
-const tourValue = (dists, path) => {
+const tourValue = (circles, path) => {
+    const dists = getDists(circles);
     if(path.length <= 1) return 0;
     let total = dists[path[0]][path[path.length - 1]];
     for(let i = 1; i < path.length; i++) { 
@@ -147,4 +148,4 @@ const tourValue = (dists, path) => {
     return total;
 }
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
-export { nearestNeighbor, swapHeuristic, twoOptHeuristic };
+export { nearestNeighbor, swapHeuristic, twoOptHeuristic, tourValue };

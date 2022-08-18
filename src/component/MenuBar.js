@@ -11,7 +11,7 @@ function MenuBar(props) {
             <Button className="clear-button" onClick={props.clear} text={"clear"} disable={props.pathFinding} />
             <Button className="find-path-button" onClick={props.findPath} text={"find path"} disable={props.pathFinding} />
             <Slider className="slider" handleChange={props.handleSliderChange} />
-            <Stats />
+            <Stats pathLength={props.pathLength} nNodes={props.nNodes}/>
             <Dropdown className="dropdown" algorithms={props.algorithms} selectedAlgo={props.selectedAlgo} handleDropdownClick={props.handleDropdownClick} disable={props.pathFinding}/>
         </div>
         

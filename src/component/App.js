@@ -1,11 +1,12 @@
 import "./App.css";
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import MainArea from "./MainArea";
 import MenuBar from "./MenuBar";
 import {
   nearestNeighbor,
   swapHeuristic,
   twoOptHeuristic,
+  tourValue,
 } from "../logic/FindPath";
 
 function App() {
@@ -15,7 +16,7 @@ function App() {
   const [pathFinding, setPathFinding] = useState(false);
   const [pathSpeed, setPathSpeed] = useState(5);
   const availAlgos = ["twoOpt", "nearestNeighbor"];
-  
+  const pathLength = useCallback(() => tourValue(circles, path), [path])
   const handleSliderChange  = event => {
     setPathSpeed(event.target.valueAsNumber);
   }
@@ -59,6 +60,8 @@ function App() {
         handleDropdownClick={handleDropdownClick}
         pathFinding={pathFinding}
         handleSliderChange={handleSliderChange}
+        pathLength={pathLength()}
+        nNodes={circles.length}
       />
       <MainArea
         handleClick={handleMainAreaClick}
