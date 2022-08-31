@@ -1,0 +1,3 @@
+Implement ant colony heuristic 
+Implement lin-kernighan heuristic
+Implement pause/stop functionality during path calc
