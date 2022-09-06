@@ -2,6 +2,7 @@ import Canvas from './Canvas'
 import Slider from './Slider';
 import { useState } from 'react';
 import './MainArea.css'
+
 function MainArea(props) { 
     const [mouseX, setMouseX] = useState(0);
     const [mouseY, setMouseY] = useState(0);
@@ -74,6 +75,7 @@ function MainArea(props) {
                     <Canvas className="main-layer" draw={draw} circles={props.circles} path={props.path}/>
                     <Canvas className="mouse-circle-layer" draw={draw2}/>
             </div>
+            
         );
 }
 export default MainArea;

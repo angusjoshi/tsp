@@ -11,3 +11,9 @@
     width: inherit;
     height: inherit;
 }
+
+.gh-link {
+    width: 64px;
+    height: 64px;
+    grid: 1 1;
+}
